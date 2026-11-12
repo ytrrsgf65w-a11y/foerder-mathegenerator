@@ -3,18 +3,75 @@ const MODULES = {
   division: 'Division', story: 'Sachaufgaben'
 };
 const ranges = [10, 20, 50, 100, 1000, 10000];
-const rowsAll = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const allRows = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const topics = ['Schule', 'Einkaufen', 'Tiere', 'Freizeit', 'Sport'];
 const operations = ['Addition', 'Subtraktion', 'Multiplikation', 'Division'];
+const names = ['Amir', 'Aylin', 'Ben', 'Can', 'David', 'Elif', 'Emma', 'Fatima', 'Hanna', 'Hassan', 'Ida', 'Jamal', 'Jana', 'Jonas', 'Lina', 'Malik', 'Mara', 'Mehmet', 'Mila', 'Mina', 'Moussa', 'Noah', 'Nora', 'Omar', 'Rania', 'Sami', 'Sara', 'Sofia', 'Yara', 'Yusuf'];
+
+// Seven Alltagsszenarien je Thema: Zusammen mit vier Rechenarten entstehen 140
+// klar unterscheidbare Themen-/Rechenart-Vorlagen (mindestens fünf je Kombination).
+const scenes = {
+  Schule: [
+    { id: 'kinder', place: 'In einer Klasse', item: 'Kinder', add: 'kommen {b} Kinder dazu', subtract: 'gehen {b} Kinder nach Hause' },
+    { id: 'buecher', place: 'In der Schulbücherei', item: 'Bücher', add: 'stellt {b} Bücher ins Regal', subtract: 'leiht {b} Bücher aus' },
+    { id: 'stifte', place: 'Auf dem Lehrertisch', item: 'Stifte', add: 'legt {b} Stifte dazu', subtract: 'nimmt {b} Stifte weg' },
+    { id: 'hefte', place: 'Im Klassenraum', item: 'Hefte', add: 'bringt {b} Hefte mit', subtract: 'packt {b} Hefte ein' },
+    { id: 'arbeitsblaetter', place: 'Auf dem Tisch', item: 'Arbeitsblätter', add: 'legt {b} Arbeitsblätter dazu', subtract: 'teilt {b} Arbeitsblätter aus' },
+    { id: 'gruppenarbeit', place: 'Bei der Gruppenarbeit', item: 'Kinder', add: 'setzt sich {b} Kinder dazu', subtract: 'wechseln {b} Kinder die Gruppe' },
+    { id: 'sitzplaetze', place: 'Im Klassenraum', item: 'freie Sitzplätze', add: 'werden {b} Plätze frei', subtract: 'werden {b} Plätze besetzt' }
+  ],
+  Einkaufen: [
+    { id: 'aepfel', place: 'Am Obststand', item: 'Äpfel', add: 'legt {b} Äpfel in den Korb', subtract: 'nimmt {b} Äpfel aus dem Korb' },
+    { id: 'broetchen', place: 'In der Bäckerei', item: 'Brötchen', add: 'kauft {b} Brötchen dazu', subtract: 'nimmt {b} Brötchen aus der Tüte' },
+    { id: 'getraenke', place: 'Im Getränkemarkt', item: 'Getränkeflaschen', add: 'stellt {b} Flaschen in den Wagen', subtract: 'bringt {b} Flaschen zurück' },
+    { id: 'eis', place: 'An der Eisdiele', item: 'Eiskugeln', add: 'bestellt {b} Kugeln dazu', subtract: 'gibt {b} Kugeln ab' },
+    { id: 'suessigkeiten', place: 'Im Laden', item: 'Süßigkeiten', add: 'legt {b} Süßigkeiten in die Tüte', subtract: 'nimmt {b} Süßigkeiten heraus' },
+    { id: 'obst', place: 'Im Supermarkt', item: 'Birnen', add: 'kauft {b} Birnen dazu', subtract: 'legt {b} Birnen zurück' },
+    { id: 'gemuese', place: 'Am Gemüsestand', item: 'Möhren', add: 'legt {b} Möhren in den Korb', subtract: 'nimmt {b} Möhren heraus' }
+  ],
+  Tiere: [
+    { id: 'schafe', place: 'Auf der Weide', item: 'Schafe', add: 'kommen {b} Schafe dazu', subtract: 'gehen {b} Schafe in den Stall' },
+    { id: 'kaninchen', place: 'Im Gehege', item: 'Kaninchen', add: 'ziehen {b} Kaninchen ein', subtract: 'werden {b} Kaninchen in ein anderes Gehege gebracht' },
+    { id: 'pferde', place: 'Auf dem Reiterhof', item: 'Pferde', add: 'kommen {b} Pferde dazu', subtract: 'gehen {b} Pferde auf eine andere Koppel' },
+    { id: 'kuehe', place: 'Im Stall', item: 'Kühe', add: 'kommen {b} Kühe in den Stall', subtract: 'gehen {b} Kühe auf die Weide' },
+    { id: 'enten', place: 'Am Teich', item: 'Enten', add: 'kommen {b} Enten dazu', subtract: 'schwimmen {b} Enten davon' },
+    { id: 'fische', place: 'Im Aquarium', item: 'Fische', add: 'kommen {b} Fische dazu', subtract: 'werden {b} Fische umgesetzt' },
+    { id: 'hunde', place: 'Auf dem Hundeplatz', item: 'Hunde', add: 'kommen {b} Hunde dazu', subtract: 'gehen {b} Hunde nach Hause' }
+  ],
+  Freizeit: [
+    { id: 'sticker', place: 'In Yaras Sammelheft', item: 'Sticker', add: 'klebt {b} Sticker dazu', subtract: 'tauscht {b} Sticker' },
+    { id: 'murmeln', place: 'Auf dem Spielplatz', item: 'Murmeln', add: 'findet {b} Murmeln dazu', subtract: 'verschenkt {b} Murmeln' },
+    { id: 'sammelkarten', place: 'Beim Tauschen', item: 'Sammelkarten', add: 'bekommt {b} Karten dazu', subtract: 'gibt {b} Karten ab' },
+    { id: 'comics', place: 'Im Bücherregal', item: 'Comics', add: 'stellt {b} Comics dazu', subtract: 'leiht {b} Comics aus' },
+    { id: 'freizeitbuecher', place: 'In der Leseecke', item: 'Bücher', add: 'legt {b} Bücher dazu', subtract: 'nimmt {b} Bücher mit' },
+    { id: 'spiele', place: 'Im Spielezimmer', item: 'Brettspiele', add: 'stellt {b} Spiele ins Regal', subtract: 'leiht {b} Spiele aus' }
+  ],
+  Sport: [
+    { id: 'punkte', place: 'Beim Sportfest', item: 'Punkte', add: 'bekommt das Team {b} Punkte dazu', subtract: 'verliert das Team {b} Punkte' },
+    { id: 'runden', place: 'Auf der Laufbahn', item: 'Runden', add: 'läuft die Gruppe {b} Runden weiter', subtract: 'bleiben noch {b} Runden übrig' },
+    { id: 'wuerfe', place: 'Beim Zielwerfen', item: 'Würfe', add: 'macht die Gruppe {b} Würfe', subtract: 'bleiben noch {b} Würfe übrig' },
+    { id: 'spruenge', place: 'Beim Springen', item: 'Sprünge', add: 'macht die Gruppe {b} Sprünge dazu', subtract: 'werden {b} Sprünge gestrichen' },
+    { id: 'treffer', place: 'Beim Training', item: 'Treffer', add: 'erzielt das Team {b} Treffer dazu', subtract: 'werden {b} Treffer abgezogen' },
+    { id: 'mannschaften', place: 'Beim Turnier', item: 'Spielerinnen und Spieler', add: 'kommen {b} dazu', subtract: 'wechseln {b} in ein anderes Team' },
+    { id: 'sportgeraete', place: 'In der Sporthalle', item: 'Bälle', add: 'holt die Gruppe {b} Bälle dazu', subtract: 'räumt die Gruppe {b} Bälle weg' }
+  ]
+};
 const state = { modules: [], results: null };
 const moduleList = document.getElementById('module-list');
 const resultsSection = document.getElementById('results');
 const statusMessage = document.getElementById('status-message');
 const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 const choose = values => values[rand(0, values.length - 1)];
-const number = value => value.toLocaleString('de-DE');
+const number = value => Number(value).toLocaleString('de-DE');
 const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
-
+function shuffled(values) {
+  const result = [...values];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = rand(0, i);
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
 function options(values, selected, label = value => value) {
   return values.map(value => `<option value="${value}"${value === selected ? ' selected' : ''}>${label(value)}</option>`).join('');
 }
@@ -37,7 +94,7 @@ function settings(module) {
     html += field('Zahlenraum', 'range', ranges, c.range, value => `bis ${Number(value).toLocaleString('de-DE')}`);
     html += field(module.type === 'addition' ? 'Zehnerübergang' : 'Entbündeln', 'difficulty', difficulties.map(x => x[0]), c.difficulty, value => difficulties.find(x => x[0] === value)[1]);
   } else if (module.type === 'multiplication') {
-    const rowChecks = rowsAll.map(row => `<label class="check-option"><input type="checkbox" data-row="${row}"${c.rows.includes(row) ? ' checked' : ''}> ${row}er-Reihe</label>`).join('');
+    const rowChecks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(row => `<label class="check-option"><input type="checkbox" data-row="${row}"${c.rows.includes(row) ? ' checked' : ''}> ${row}er-Reihe</label>`).join('');
     html += `<div class="field setting-wide"><span>Reihen auswählen</span><div class="filter-actions"><button class="filter-button" type="button" data-filter="easy">Leicht · 1, 2, 5, 10</button><button class="filter-button" type="button" data-filter="medium">Mittel · 3, 4, 6</button><button class="filter-button" type="button" data-filter="hard">Schwer · 7, 8, 9</button><button class="filter-button" type="button" data-filter="all">Alle</button></div><div class="row-options">${rowChecks}</div></div>`;
   } else if (module.type === 'division') {
     const modes = [['without', 'Ohne Rest'], ['with', 'Mit Rest'], ['mixed', 'Gemischt']];
@@ -89,7 +146,7 @@ moduleList.addEventListener('click', event => {
   const card = button.closest('.module-card');
   const module = state.modules.find(item => item.id === card?.dataset.moduleId);
   if (!module) return;
-  const filters = { easy: [1, 2, 5, 10], medium: [3, 4, 6], hard: [7, 8, 9], all: rowsAll };
+  const filters = { easy: [1, 2, 5, 10], medium: [3, 4, 6], hard: [7, 8, 9], all: allRows };
   module.config.rows = [...filters[button.dataset.filter]];
   card.querySelectorAll('[data-row]').forEach(input => { input.checked = module.config.rows.includes(Number(input.dataset.row)); });
   invalidate();
@@ -119,32 +176,67 @@ function division(mode) {
   }
   return { question: `${divisor * quotient} : ${divisor} = ____`, answer: String(quotient) };
 }
-function story(module) {
+function storyTemplates(module) {
   const c = module.config;
-  const topic = c.topic === 'Gemischt' ? choose(topics) : c.topic;
-  const operation = c.operation === 'Gemischt' ? choose(operations) : c.operation;
-  const name = choose(['Mia', 'Tom', 'Ali', 'Lena', 'Noah', 'Emma']);
-  const nouns = { Schule: 'Stifte', Einkaufen: 'Euro', Tiere: 'Leckerli', Freizeit: 'Sticker', Sport: 'Punkte' };
-  const noun = nouns[topic];
-  let a = rand(2, 20), b = rand(2, 12), question, answer;
+  const chosenTopics = c.topic === 'Gemischt' ? topics : [c.topic];
+  const chosenOperations = c.operation === 'Gemischt' ? operations : [c.operation];
+  return shuffled(chosenTopics.flatMap(topic => scenes[topic].flatMap(scene => chosenOperations.map(operation => ({ topic, scene, operation })))));
+}
+function storyFromTemplate(template, language, person) {
+  const { topic, scene, operation } = template;
+  const item = scene.item;
+  let a, b, context, action, question, answer;
   if (operation === 'Addition') {
-    question = `${name} hat ${a} ${noun}. ${name} bekommt ${b} ${noun} dazu.\nWie viele ${noun} hat ${name} jetzt?`;
+    a = rand(3, 16); b = rand(1, 12);
+    context = `${scene.place} gibt es schon ${a} ${item}.`;
+    action = scene.add.replace('{b}', b).replace(/^/, `${person} `) + '.';
+    question = `Wie viele ${item} sind es jetzt?`;
     answer = number(a + b);
   } else if (operation === 'Subtraktion') {
-    a = rand(6, 40); b = rand(1, a);
-    question = `${name} hat ${a} ${noun}. ${name} gibt ${b} ${noun} ab.\nWie viele ${noun} bleiben übrig?`;
+    a = rand(5, 25); b = rand(1, a - 1);
+    context = `${scene.place} sind es ${a} ${item}.`;
+    action = scene.subtract.replace('{b}', b).replace(/^/, `${person} `) + '.';
+    question = `Wie viele ${item} bleiben übrig?`;
     answer = number(a - b);
   } else if (operation === 'Multiplikation') {
-    question = `Es gibt ${a} Gruppen. In jeder Gruppe sind ${b} ${noun}.\nWie viele ${noun} sind es zusammen?`;
+    a = rand(2, 5); b = rand(2, 8);
+    context = `${scene.place} werden ${a} Gruppen gebildet.`;
+    action = `In jeder Gruppe sind ${b} ${item}.`;
+    question = `Wie viele ${item} sind es zusammen?`;
     answer = number(a * b);
   } else {
-    question = `${a * b} ${noun} werden gleichmäßig auf ${a} Gruppen verteilt.\nWie viele ${noun} sind in jeder Gruppe?`;
+    a = rand(2, 5); b = rand(2, 8);
+    context = `${person} hat ${a * b} ${item}.`;
+    action = `${person} verteilt sie gleichmäßig auf ${a} Gruppen.`;
+    question = `Wie viele ${item} sind in jeder Gruppe?`;
     answer = String(b);
   }
-  if (c.language === 'Standard') question = `${topic}: ${question.replace('\n', ' ')} Berechne die Gesamtmenge.`;
-  return { question, answer, label: `${topic} · ${operation}` };
+  if (language === 'Standard') {
+    context = `${scene.place} befinden sich ${a} ${item}.`;
+    if (operation === 'Addition') action = `${person} ergänzt die Menge um ${b} ${item}.`;
+    else if (operation === 'Subtraktion') action = `${person} nimmt ${b} davon weg.`;
+    else if (operation === 'Multiplikation') action = `${a} Gruppen enthalten jeweils ${b} ${item}.`;
+    else action = `Die Menge wird gleichmäßig auf ${a} Gruppen verteilt.`;
+    question = operation === 'Subtraktion' ? `Wie viele ${item} verbleiben?` : operation === 'Division' ? `Wie viele ${item} entfallen auf jede Gruppe?` : `Wie groß ist die Gesamtzahl der ${item}?`;
+  } else if (language === 'Einfach') {
+    if (operation === 'Multiplikation') context = `${scene.place} gibt es ${a} Gruppen.`;
+    if (operation === 'Division') context = `${person} hat ${a * b} ${item}.`;
+  }
+  return { question: `${context}\n${action}\n${question}`, answer, label: `${topic} · ${operation} · ${scene.id}` };
 }
-function tasksFor(module) {
+function storyTasks(module, namePool) {
+  const templates = storyTemplates(module);
+  return Array.from({ length: module.config.count }, (_, index) => {
+    // Ziehe zuerst jede verfügbare Kontext-/Rechenart-Vorlage einmal, bevor eine
+    // Vorlage erneut drankommt. Namen werden ebenfalls erst nach dem Poolwechsel wiederholt.
+    const template = templates[index % templates.length];
+    if (index > 0 && index % templates.length === 0) templates.splice(0, templates.length, ...shuffled(templates));
+    if (!namePool.length) namePool.push(...shuffled(names));
+    return storyFromTemplate(template, module.config.language, namePool.pop());
+  });
+}
+function tasksFor(module, namePool) {
+  if (module.type === 'story') return storyTasks(module, namePool);
   return Array.from({ length: module.config.count }, () => {
     const c = module.config;
     if (module.type === 'addition') return addition(c.range, c.difficulty);
@@ -153,8 +245,7 @@ function tasksFor(module) {
       const row = choose(c.rows), factor = rand(1, 10);
       return { question: `${row} × ${factor} = ____`, answer: number(row * factor) };
     }
-    if (module.type === 'division') return division(c.difficulty);
-    return story(module);
+    return division(c.difficulty);
   });
 }
 function buildResults() {
@@ -162,8 +253,10 @@ function buildResults() {
   if (!state.modules.length) return fail('Füge mindestens ein Aufgabenmodul hinzu.');
   if (state.modules.some(m => m.type === 'multiplication' && !m.config.rows.length)) return fail('Wähle bei jedem Multiplikationsmodul mindestens eine Reihe aus.');
   const title = document.getElementById('worksheet-title').value.trim() || 'Mein Mathe-Arbeitsblatt';
-  const name = document.getElementById('student-name').value.trim();
-  state.results = { title, name, date: new Intl.DateTimeFormat('de-DE', { dateStyle: 'long' }).format(new Date()), groups: state.modules.map(module => ({ title: MODULES[module.type], tasks: tasksFor(module) })) };
+  const student = document.getElementById('student-name').value.trim();
+  const namePool = shuffled(names);
+  const groups = state.modules.map(module => ({ title: MODULES[module.type], tasks: tasksFor(module, namePool) }));
+  state.results = { title, name: student, date: new Intl.DateTimeFormat('de-DE', { dateStyle: 'long' }).format(new Date()), groups };
   renderPreviews();
   resultsSection.hidden = false;
   statusMessage.textContent = 'Fertig! Vorschau und Word-Dateien sind bereit.';
