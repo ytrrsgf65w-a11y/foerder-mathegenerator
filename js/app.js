@@ -1,61 +1,15 @@
 const MODULES = {
-  addition: 'Addition', subtraction: 'Subtraktion', multiplication: 'Multiplikation',
-  division: 'Division', story: 'Sachaufgaben'
+  addition: 'Addition',
+  subtraction: 'Subtraktion',
+  multiplication: 'Multiplikation',
+  division: 'Division',
+  story: 'Sachaufgaben'
 };
 const ranges = [10, 20, 50, 100, 1000, 10000];
 const allRows = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const topics = ['Schule', 'Einkaufen', 'Tiere', 'Freizeit', 'Sport'];
 const operations = ['Addition', 'Subtraktion', 'Multiplikation', 'Division'];
-const names = ['Amir', 'Aylin', 'Ben', 'Can', 'David', 'Elif', 'Emma', 'Fatima', 'Hanna', 'Hassan', 'Ida', 'Jamal', 'Jana', 'Jonas', 'Lina', 'Malik', 'Mara', 'Mehmet', 'Mila', 'Mina', 'Moussa', 'Noah', 'Nora', 'Omar', 'Rania', 'Sami', 'Sara', 'Sofia', 'Yara', 'Yusuf'];
-
-// Seven Alltagsszenarien je Thema: Zusammen mit vier Rechenarten entstehen 140
-// klar unterscheidbare Themen-/Rechenart-Vorlagen (mindestens fünf je Kombination).
-const scenes = {
-  Schule: [
-    { id: 'kinder', place: 'In einer Klasse', item: 'Kinder', add: 'kommen {b} Kinder dazu', subtract: 'gehen {b} Kinder nach Hause' },
-    { id: 'buecher', place: 'In der Schulbücherei', item: 'Bücher', add: 'stellt {b} Bücher ins Regal', subtract: 'leiht {b} Bücher aus' },
-    { id: 'stifte', place: 'Auf dem Lehrertisch', item: 'Stifte', add: 'legt {b} Stifte dazu', subtract: 'nimmt {b} Stifte weg' },
-    { id: 'hefte', place: 'Im Klassenraum', item: 'Hefte', add: 'bringt {b} Hefte mit', subtract: 'packt {b} Hefte ein' },
-    { id: 'arbeitsblaetter', place: 'Auf dem Tisch', item: 'Arbeitsblätter', add: 'legt {b} Arbeitsblätter dazu', subtract: 'teilt {b} Arbeitsblätter aus' },
-    { id: 'gruppenarbeit', place: 'Bei der Gruppenarbeit', item: 'Kinder', add: 'setzt sich {b} Kinder dazu', subtract: 'wechseln {b} Kinder die Gruppe' },
-    { id: 'sitzplaetze', place: 'Im Klassenraum', item: 'freie Sitzplätze', add: 'werden {b} Plätze frei', subtract: 'werden {b} Plätze besetzt' }
-  ],
-  Einkaufen: [
-    { id: 'aepfel', place: 'Am Obststand', item: 'Äpfel', add: 'legt {b} Äpfel in den Korb', subtract: 'nimmt {b} Äpfel aus dem Korb' },
-    { id: 'broetchen', place: 'In der Bäckerei', item: 'Brötchen', add: 'kauft {b} Brötchen dazu', subtract: 'nimmt {b} Brötchen aus der Tüte' },
-    { id: 'getraenke', place: 'Im Getränkemarkt', item: 'Getränkeflaschen', add: 'stellt {b} Flaschen in den Wagen', subtract: 'bringt {b} Flaschen zurück' },
-    { id: 'eis', place: 'An der Eisdiele', item: 'Eiskugeln', add: 'bestellt {b} Kugeln dazu', subtract: 'gibt {b} Kugeln ab' },
-    { id: 'suessigkeiten', place: 'Im Laden', item: 'Süßigkeiten', add: 'legt {b} Süßigkeiten in die Tüte', subtract: 'nimmt {b} Süßigkeiten heraus' },
-    { id: 'obst', place: 'Im Supermarkt', item: 'Birnen', add: 'kauft {b} Birnen dazu', subtract: 'legt {b} Birnen zurück' },
-    { id: 'gemuese', place: 'Am Gemüsestand', item: 'Möhren', add: 'legt {b} Möhren in den Korb', subtract: 'nimmt {b} Möhren heraus' }
-  ],
-  Tiere: [
-    { id: 'schafe', place: 'Auf der Weide', item: 'Schafe', add: 'kommen {b} Schafe dazu', subtract: 'gehen {b} Schafe in den Stall' },
-    { id: 'kaninchen', place: 'Im Gehege', item: 'Kaninchen', add: 'ziehen {b} Kaninchen ein', subtract: 'werden {b} Kaninchen in ein anderes Gehege gebracht' },
-    { id: 'pferde', place: 'Auf dem Reiterhof', item: 'Pferde', add: 'kommen {b} Pferde dazu', subtract: 'gehen {b} Pferde auf eine andere Koppel' },
-    { id: 'kuehe', place: 'Im Stall', item: 'Kühe', add: 'kommen {b} Kühe in den Stall', subtract: 'gehen {b} Kühe auf die Weide' },
-    { id: 'enten', place: 'Am Teich', item: 'Enten', add: 'kommen {b} Enten dazu', subtract: 'schwimmen {b} Enten davon' },
-    { id: 'fische', place: 'Im Aquarium', item: 'Fische', add: 'kommen {b} Fische dazu', subtract: 'werden {b} Fische umgesetzt' },
-    { id: 'hunde', place: 'Auf dem Hundeplatz', item: 'Hunde', add: 'kommen {b} Hunde dazu', subtract: 'gehen {b} Hunde nach Hause' }
-  ],
-  Freizeit: [
-    { id: 'sticker', place: 'In Yaras Sammelheft', item: 'Sticker', add: 'klebt {b} Sticker dazu', subtract: 'tauscht {b} Sticker' },
-    { id: 'murmeln', place: 'Auf dem Spielplatz', item: 'Murmeln', add: 'findet {b} Murmeln dazu', subtract: 'verschenkt {b} Murmeln' },
-    { id: 'sammelkarten', place: 'Beim Tauschen', item: 'Sammelkarten', add: 'bekommt {b} Karten dazu', subtract: 'gibt {b} Karten ab' },
-    { id: 'comics', place: 'Im Bücherregal', item: 'Comics', add: 'stellt {b} Comics dazu', subtract: 'leiht {b} Comics aus' },
-    { id: 'freizeitbuecher', place: 'In der Leseecke', item: 'Bücher', add: 'legt {b} Bücher dazu', subtract: 'nimmt {b} Bücher mit' },
-    { id: 'spiele', place: 'Im Spielezimmer', item: 'Brettspiele', add: 'stellt {b} Spiele ins Regal', subtract: 'leiht {b} Spiele aus' }
-  ],
-  Sport: [
-    { id: 'punkte', place: 'Beim Sportfest', item: 'Punkte', add: 'bekommt das Team {b} Punkte dazu', subtract: 'verliert das Team {b} Punkte' },
-    { id: 'runden', place: 'Auf der Laufbahn', item: 'Runden', add: 'läuft die Gruppe {b} Runden weiter', subtract: 'bleiben noch {b} Runden übrig' },
-    { id: 'wuerfe', place: 'Beim Zielwerfen', item: 'Würfe', add: 'macht die Gruppe {b} Würfe', subtract: 'bleiben noch {b} Würfe übrig' },
-    { id: 'spruenge', place: 'Beim Springen', item: 'Sprünge', add: 'macht die Gruppe {b} Sprünge dazu', subtract: 'werden {b} Sprünge gestrichen' },
-    { id: 'treffer', place: 'Beim Training', item: 'Treffer', add: 'erzielt das Team {b} Treffer dazu', subtract: 'werden {b} Treffer abgezogen' },
-    { id: 'mannschaften', place: 'Beim Turnier', item: 'Spielerinnen und Spieler', add: 'kommen {b} dazu', subtract: 'wechseln {b} in ein anderes Team' },
-    { id: 'sportgeraete', place: 'In der Sporthalle', item: 'Bälle', add: 'holt die Gruppe {b} Bälle dazu', subtract: 'räumt die Gruppe {b} Bälle weg' }
-  ]
-};
+const names = [];
 const state = { modules: [], results: null };
 const moduleList = document.getElementById('module-list');
 const resultsSection = document.getElementById('results');
@@ -63,7 +17,7 @@ const statusMessage = document.getElementById('status-message');
 const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 const choose = values => values[rand(0, values.length - 1)];
 const number = value => Number(value).toLocaleString('de-DE');
-const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 function shuffled(values) {
   const result = [...values];
   for (let i = result.length - 1; i > 0; i--) {
@@ -73,7 +27,7 @@ function shuffled(values) {
   return result;
 }
 function options(values, selected, label = value => value) {
-  return values.map(value => `<option value="${value}"${value === selected ? ' selected' : ''}>${label(value)}</option>`).join('');
+  return values.map(value => `<option value="${value}"${String(value) === String(selected) ? ' selected' : ''}>${label(value)}</option>`).join('');
 }
 function field(label, key, values, selected, labelFor = value => value) {
   return `<label class="field">${label}<select data-key="${key}">${options(values, selected, labelFor)}</select></label>`;
@@ -88,17 +42,15 @@ function settings(module) {
   const c = module.config;
   let html = '';
   if (module.type === 'addition' || module.type === 'subtraction') {
-    const difficulties = module.type === 'addition'
-      ? [['without', 'Ohne Zehnerübergang'], ['with', 'Mit Zehnerübergang'], ['mixed', 'Gemischt']]
-      : [['without', 'Ohne Entbündeln'], ['with', 'Mit Entbündeln'], ['mixed', 'Gemischt']];
+    const choices = [['without', 'Ohne Zehnerübergang'], ['with', 'Mit Zehnerübergang'], ['mixed', 'Gemischt']];
     html += field('Zahlenraum', 'range', ranges, c.range, value => `bis ${Number(value).toLocaleString('de-DE')}`);
-    html += field(module.type === 'addition' ? 'Zehnerübergang' : 'Entbündeln', 'difficulty', difficulties.map(x => x[0]), c.difficulty, value => difficulties.find(x => x[0] === value)[1]);
+    html += field('Zehnerübergang', 'difficulty', choices.map(item => item[0]), c.difficulty, value => choices.find(item => item[0] === value)[1]);
   } else if (module.type === 'multiplication') {
-    const rowChecks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(row => `<label class="check-option"><input type="checkbox" data-row="${row}"${c.rows.includes(row) ? ' checked' : ''}> ${row}er-Reihe</label>`).join('');
-    html += `<div class="field setting-wide"><span>Reihen auswählen</span><div class="filter-actions"><button class="filter-button" type="button" data-filter="easy">Leicht · 1, 2, 5, 10</button><button class="filter-button" type="button" data-filter="medium">Mittel · 3, 4, 6</button><button class="filter-button" type="button" data-filter="hard">Schwer · 7, 8, 9</button><button class="filter-button" type="button" data-filter="all">Alle</button></div><div class="row-options">${rowChecks}</div></div>`;
+    const checkboxes = allRows.map(row => `<label class="check-option"><input type="checkbox" data-row="${row}"${c.rows.includes(row) ? ' checked' : ''}> ${row}er-Reihe</label>`).join('');
+    html += `<div class="field setting-wide"><span>Reihen auswählen</span><div class="filter-actions"><button class="filter-button" type="button" data-filter="easy">Leicht · 1, 2, 5, 10</button><button class="filter-button" type="button" data-filter="medium">Mittel · 3, 4, 6</button><button class="filter-button" type="button" data-filter="hard">Schwer · 7, 8, 9</button><button class="filter-button" type="button" data-filter="all">Alle</button></div><div class="row-options">${checkboxes}</div></div>`;
   } else if (module.type === 'division') {
     const modes = [['without', 'Ohne Rest'], ['with', 'Mit Rest'], ['mixed', 'Gemischt']];
-    html += field('Aufgabenmodus', 'difficulty', modes.map(x => x[0]), c.difficulty, value => modes.find(x => x[0] === value)[1]);
+    html += field('Aufgabenmodus', 'difficulty', modes.map(item => item[0]), c.difficulty, value => modes.find(item => item[0] === value)[1]);
   } else {
     html += field('Thema', 'topic', [...topics, 'Gemischt'], c.topic);
     html += field('Rechenart', 'operation', ['Gemischt', ...operations], c.operation);
@@ -112,7 +64,7 @@ function renderModules() {
     moduleList.innerHTML = '<div class="empty-modules">Deine Module erscheinen hier. Wähle oben eine Aufgabenart aus.</div>';
     return;
   }
-  moduleList.innerHTML = state.modules.map((module, index) => `<article class="module-card" data-module-id="${module.id}"><header class="module-card-header"><span class="module-number">${index + 1}</span><div><h3>${MODULES[module.type]}</h3><p>Aufgaben und Einstellungen</p></div></header><div class="module-settings">${settings(module)}</div></article>`).join('');
+  moduleList.innerHTML = state.modules.map((module, index) => `<article class="module-card" data-module-id="${escapeHtml(module.id)}"><header class="module-card-header"><span class="module-number">${index + 1}</span><div class="module-card-title"><h3>${escapeHtml(MODULES[module.type] || module.type)}</h3><p>${module.config.range ? `Zahlenraum bis ${number(module.config.range)}` : `${module.config.count} Aufgaben`}</p></div><button class="remove-module" type="button" data-remove-module="${escapeHtml(module.id)}">Modul löschen</button></header><div class="module-settings">${settings(module)}</div></article>`).join('');
 }
 function invalidate(message = 'Einstellungen geändert. Erstelle das Arbeitsblatt neu, um die Vorschau zu aktualisieren.') {
   state.results = null;
@@ -122,6 +74,7 @@ function invalidate(message = 'Einstellungen geändert. Erstelle das Arbeitsblat
 }
 document.querySelectorAll('.add-module').forEach(button => button.addEventListener('click', () => {
   const type = button.dataset.module;
+  if (type === 'story') return;
   state.modules.push({ id: String(Date.now() + Math.random()), type, config: defaults(type) });
   renderModules();
   invalidate('Modul hinzugefügt. Du kannst weitere Module ergänzen und dann das Arbeitsblatt erstellen.');
@@ -176,67 +129,7 @@ function division(mode) {
   }
   return { question: `${divisor * quotient} : ${divisor} = ____`, answer: String(quotient) };
 }
-function storyTemplates(module) {
-  const c = module.config;
-  const chosenTopics = c.topic === 'Gemischt' ? topics : [c.topic];
-  const chosenOperations = c.operation === 'Gemischt' ? operations : [c.operation];
-  return shuffled(chosenTopics.flatMap(topic => scenes[topic].flatMap(scene => chosenOperations.map(operation => ({ topic, scene, operation })))));
-}
-function storyFromTemplate(template, language, person) {
-  const { topic, scene, operation } = template;
-  const item = scene.item;
-  let a, b, context, action, question, answer;
-  if (operation === 'Addition') {
-    a = rand(3, 16); b = rand(1, 12);
-    context = `${scene.place} gibt es schon ${a} ${item}.`;
-    action = scene.add.replace('{b}', b).replace(/^/, `${person} `) + '.';
-    question = `Wie viele ${item} sind es jetzt?`;
-    answer = number(a + b);
-  } else if (operation === 'Subtraktion') {
-    a = rand(5, 25); b = rand(1, a - 1);
-    context = `${scene.place} sind es ${a} ${item}.`;
-    action = scene.subtract.replace('{b}', b).replace(/^/, `${person} `) + '.';
-    question = `Wie viele ${item} bleiben übrig?`;
-    answer = number(a - b);
-  } else if (operation === 'Multiplikation') {
-    a = rand(2, 5); b = rand(2, 8);
-    context = `${scene.place} werden ${a} Gruppen gebildet.`;
-    action = `In jeder Gruppe sind ${b} ${item}.`;
-    question = `Wie viele ${item} sind es zusammen?`;
-    answer = number(a * b);
-  } else {
-    a = rand(2, 5); b = rand(2, 8);
-    context = `${person} hat ${a * b} ${item}.`;
-    action = `${person} verteilt sie gleichmäßig auf ${a} Gruppen.`;
-    question = `Wie viele ${item} sind in jeder Gruppe?`;
-    answer = String(b);
-  }
-  if (language === 'Standard') {
-    context = `${scene.place} befinden sich ${a} ${item}.`;
-    if (operation === 'Addition') action = `${person} ergänzt die Menge um ${b} ${item}.`;
-    else if (operation === 'Subtraktion') action = `${person} nimmt ${b} davon weg.`;
-    else if (operation === 'Multiplikation') action = `${a} Gruppen enthalten jeweils ${b} ${item}.`;
-    else action = `Die Menge wird gleichmäßig auf ${a} Gruppen verteilt.`;
-    question = operation === 'Subtraktion' ? `Wie viele ${item} verbleiben?` : operation === 'Division' ? `Wie viele ${item} entfallen auf jede Gruppe?` : `Wie groß ist die Gesamtzahl der ${item}?`;
-  } else if (language === 'Einfach') {
-    if (operation === 'Multiplikation') context = `${scene.place} gibt es ${a} Gruppen.`;
-    if (operation === 'Division') context = `${person} hat ${a * b} ${item}.`;
-  }
-  return { question: `${context}\n${action}\n${question}`, answer, label: `${topic} · ${operation} · ${scene.id}` };
-}
-function storyTasks(module, namePool) {
-  const templates = storyTemplates(module);
-  return Array.from({ length: module.config.count }, (_, index) => {
-    // Ziehe zuerst jede verfügbare Kontext-/Rechenart-Vorlage einmal, bevor eine
-    // Vorlage erneut drankommt. Namen werden ebenfalls erst nach dem Poolwechsel wiederholt.
-    const template = templates[index % templates.length];
-    if (index > 0 && index % templates.length === 0) templates.splice(0, templates.length, ...shuffled(templates));
-    if (!namePool.length) namePool.push(...shuffled(names));
-    return storyFromTemplate(template, module.config.language, namePool.pop());
-  });
-}
-function tasksFor(module, namePool) {
-  if (module.type === 'story') return storyTasks(module, namePool);
+function tasksFor(module) {
   return Array.from({ length: module.config.count }, () => {
     const c = module.config;
     if (module.type === 'addition') return addition(c.range, c.difficulty);
@@ -245,93 +138,46 @@ function tasksFor(module, namePool) {
       const row = choose(c.rows), factor = rand(1, 10);
       return { question: `${row} × ${factor} = ____`, answer: number(row * factor) };
     }
-    return division(c.difficulty);
+    if (module.type === 'division') return division(c.difficulty);
+    return { question: '', answer: '' };
   });
 }
 function buildResults() {
-  const fail = message => { statusMessage.textContent = message; statusMessage.classList.add('error'); };
-  if (!state.modules.length) return fail('Füge mindestens ein Aufgabenmodul hinzu.');
-  if (state.modules.some(m => m.type === 'multiplication' && !m.config.rows.length)) return fail('Wähle bei jedem Multiplikationsmodul mindestens eine Reihe aus.');
-  const title = document.getElementById('worksheet-title').value.trim() || 'Mein Mathe-Arbeitsblatt';
-  const student = document.getElementById('student-name').value.trim();
-  const namePool = shuffled(names);
-  const groups = state.modules.map(module => ({ title: MODULES[module.type], tasks: tasksFor(module, namePool) }));
-  state.results = { title, name: student, date: new Intl.DateTimeFormat('de-DE', { dateStyle: 'long' }).format(new Date()), groups };
-  renderPreviews();
+  if (!state.modules.length) {
+    statusMessage.textContent = 'Füge mindestens ein Aufgabenmodul hinzu.';
+    statusMessage.classList.add('error');
+    return;
+  }
+  if (state.modules.some(module => module.type === 'multiplication' && !module.config.rows.length)) {
+    statusMessage.textContent = 'Wähle mindestens eine Einmaleins-Reihe aus.';
+    statusMessage.classList.add('error');
+    return;
+  }
+  const title = document.getElementById('worksheet-title')?.value.trim() || '';
+  const className = document.getElementById('class-name')?.value.trim() || '';
+  const date = document.getElementById('worksheet-date')?.value || '';
+  const name = document.getElementById('student-name')?.value.trim() || '';
+  state.results = { title, className, date, name, groups: state.modules.map(module => ({ title: MODULES[module.type] || module.type, tasks: tasksFor(module) })) };
+  if (typeof renderWorksheetPreviews === 'function') renderWorksheetPreviews();
   resultsSection.hidden = false;
-  statusMessage.textContent = 'Fertig! Vorschau und Word-Dateien sind bereit.';
+  statusMessage.textContent = 'Fertig! Die Druckvorschau ist bereit.';
   statusMessage.classList.remove('error');
 }
-document.getElementById('generate-button').addEventListener('click', buildResults);
-['worksheet-title', 'student-name'].forEach(id => document.getElementById(id).addEventListener('input', () => { if (state.results) invalidate(); }));
-function preview(isAnswer) {
-  let index = 1;
-  const name = state.results.name ? `Name: ${escapeHtml(state.results.name)}` : 'Name: ______________________________';
-  const groups = state.results.groups.map(group => `<h5 class="preview-module-title">${escapeHtml(group.title)}</h5>${group.tasks.map(task => `<p class="preview-task"><span class="preview-task-number">${index++}.</span><span>${escapeHtml(task.question).replace(/\n/g, '<br>')}${isAnswer ? ` <b>${escapeHtml(task.answer)}</b>` : ''}</span></p>`).join('')}`).join('');
-  return `<h4>${escapeHtml(state.results.title)}${isAnswer ? ' – Lösungen' : ''}</h4><div class="paper-meta">${name}<br>Datum: ${escapeHtml(state.results.date)}</div>${groups}`;
+document.getElementById('generate-button')?.addEventListener('click', buildResults);
+['worksheet-title', 'class-name', 'worksheet-date', 'student-name'].forEach(id => {
+  const input = document.getElementById(id);
+  input?.addEventListener('input', () => { if (state.results) invalidate(); });
+  input?.addEventListener('change', () => { if (state.results) invalidate(); });
+});
+function download() {
+  statusMessage.textContent = 'DOCX-Export ist derzeit nicht aktiviert.';
 }
-function renderPreviews() {
-  document.getElementById('worksheet-preview').innerHTML = preview(false);
-  document.getElementById('answers-preview').innerHTML = preview(true);
+const worksheetDownloadButton = document.getElementById('worksheet-download');
+if (worksheetDownloadButton) {
+  worksheetDownloadButton.addEventListener('click', () => download(false));
 }
-function xmlEscape(value) {
-  return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[char]));
+const answersDownloadButton = document.getElementById('answers-download');
+if (answersDownloadButton) {
+  answersDownloadButton.addEventListener('click', () => download(true));
 }
-function paragraph(text, bold = false) {
-  const lines = String(text).split('\n').map(line => `<w:t xml:space="preserve">${xmlEscape(line || ' ')}</w:t>`).join('<w:br/>');
-  return `<w:p><w:r><w:rPr>${bold ? '<w:b/>' : ''}</w:rPr>${lines}</w:r></w:p>`;
-}
-function crc32(bytes) {
-  let crc = 0xffffffff;
-  for (const byte of bytes) {
-    crc ^= byte;
-    for (let bit = 0; bit < 8; bit++) crc = (crc >>> 1) ^ (crc & 1 ? 0xedb88320 : 0);
-  }
-  return (crc ^ 0xffffffff) >>> 0;
-}
-function makeZip(files) {
-  const encoder = new TextEncoder(), localParts = [], centralParts = [];
-  let offset = 0;
-  const w16 = (view, pos, value) => view.setUint16(pos, value, true);
-  const w32 = (view, pos, value) => view.setUint32(pos, value, true);
-  for (const file of files) {
-    const name = encoder.encode(file.name), content = encoder.encode(file.text), crc = crc32(content);
-    const local = new Uint8Array(30 + name.length), lv = new DataView(local.buffer);
-    w32(lv, 0, 0x04034b50); w16(lv, 4, 20); w32(lv, 14, crc); w32(lv, 18, content.length); w32(lv, 22, content.length); w16(lv, 26, name.length); local.set(name, 30);
-    localParts.push(local, content);
-    const central = new Uint8Array(46 + name.length), cv = new DataView(central.buffer);
-    w32(cv, 0, 0x02014b50); w16(cv, 4, 20); w16(cv, 6, 20); w32(cv, 16, crc); w32(cv, 20, content.length); w32(cv, 24, content.length); w16(cv, 28, name.length); w32(cv, 42, offset); central.set(name, 46);
-    centralParts.push(central);
-    offset += local.length + content.length;
-  }
-  const centralSize = centralParts.reduce((sum, item) => sum + item.length, 0);
-  const end = new Uint8Array(22), ev = new DataView(end.buffer);
-  w32(ev, 0, 0x06054b50); w16(ev, 8, files.length); w16(ev, 10, files.length); w32(ev, 12, centralSize); w32(ev, 16, offset);
-  return new Blob([...localParts, ...centralParts, end], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-}
-function docx(isAnswer) {
-  const data = state.results;
-  const body = [paragraph(`${data.title}${isAnswer ? ' – Lösungsblatt' : ''}`, true), paragraph(data.name ? `Name: ${data.name}` : 'Name: ______________________________'), paragraph(`Datum: ${data.date}`)];
-  let index = 1;
-  for (const group of data.groups) {
-    body.push(paragraph(group.title, true));
-    group.tasks.forEach(task => body.push(paragraph(`${index++}.  ${task.question}${isAnswer ? `   ${task.answer}` : ''}`)));
-  }
-  body.push('<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"/></w:sectPr>');
-  const documentXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${body.join('')}</w:body></w:document>`;
-  const types = '<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>';
-  const rels = '<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>';
-  return makeZip([{ name: '[Content_Types].xml', text: types }, { name: '_rels/.rels', text: rels }, { name: 'word/document.xml', text: documentXml }]);
-}
-function download(isAnswer) {
-  if (!state.results) return;
-  const link = document.createElement('a'), blob = docx(isAnswer);
-  const base = (state.results.title || 'Arbeitsblatt').replace(/[\\:*?"<>|]/g, '-').replace(/\//g, '-').trim() || 'Arbeitsblatt';
-  link.href = URL.createObjectURL(blob);
-  link.download = `${base}${isAnswer ? '-Loesungen' : ''}.docx`;
-  document.body.append(link); link.click(); link.remove();
-  setTimeout(() => URL.revokeObjectURL(link.href), 1000);
-}
-document.getElementById('worksheet-download').addEventListener('click', () => download(false));
-document.getElementById('answers-download').addEventListener('click', () => download(true));
 renderModules();
