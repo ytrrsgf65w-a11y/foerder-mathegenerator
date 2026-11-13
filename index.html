@@ -80,6 +80,11 @@
       </div>
       <div class="print-action"><button id="print-button" class="secondary-button" type="button">Drucken</button><span>Im Druckdialog bei Bedarf „Als PDF speichern“ wählen.</span></div>
     </section>
+    <!-- app.js still registers dormant DOCX handlers; keep required elements available but not visible. -->
+    <div hidden aria-hidden="true">
+      <button id="worksheet-download" type="button"></button>
+      <button id="answers-download" type="button"></button>
+    </div>
     <footer><p>Für den Unterricht gemacht · Ohne Anmeldung · Daten bleiben auf diesem Gerät</p></footer>
   </main>
 </body>
