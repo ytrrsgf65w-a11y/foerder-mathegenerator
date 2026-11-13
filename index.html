@@ -10,6 +10,7 @@
   <script src="js/app.js" defer></script>
   <script src="js/extra-modules.js" defer></script>
   <script src="js/disable-story-module.js" defer></script>
+  <script src="js/worksheet-presentation.js" defer></script>
 </head>
 <body>
   <header class="topbar">
@@ -26,10 +27,20 @@
       <p>Stelle aus einzelnen Aufgabenmodulen ein Arbeitsblatt und ein separates Lösungsblatt zusammen.</p>
     </section>
     <section class="panel details-panel" aria-labelledby="details-title">
-      <div class="section-heading"><div><p class="step-label">SCHRITT 1</p><h2 id="details-title">Arbeitsblatt benennen</h2></div></div>
-      <div class="details-grid">
-        <label class="field">Titel des Arbeitsblatts<input id="worksheet-title" type="text" maxlength="80" value="Mein Mathe-Arbeitsblatt" autocomplete="off"></label>
-        <label class="field">Name auf dem Arbeitsblatt<input id="student-name" type="text" maxlength="60" placeholder="Name: ____________________" autocomplete="off"></label>
+      <div class="section-heading"><div><p class="step-label">SCHRITT 1</p><h2 id="details-title">Arbeitsblatt vorbereiten</h2></div></div>
+      <div class="details-grid details-grid-three">
+        <label class="field">Titel des Arbeitsblatts <span class="optional-label">optional</span>
+          <input id="worksheet-title" type="text" maxlength="80" placeholder="Mathe-Arbeitsblatt" autocomplete="off">
+        </label>
+        <label class="field">Klasse
+          <input id="class-name" type="text" maxlength="30" placeholder="z. B. 5L" autocomplete="off">
+        </label>
+        <label class="field">Datum
+          <input id="worksheet-date" type="date">
+        </label>
+        <label class="field student-field">Name auf dem Arbeitsblatt
+          <input id="student-name" type="text" maxlength="60" placeholder="leer lassen für eine Schreiblinie" autocomplete="off">
+        </label>
       </div>
     </section>
     <section class="builder-section" aria-labelledby="builder-title">
@@ -49,13 +60,25 @@
       </div>
       <div id="module-list" class="module-list" aria-live="polite"></div>
     </section>
-    <section class="generate-area" aria-label="Arbeitsblatt erstellen"><button id="generate-button" class="primary-button" type="button">Arbeitsblatt erstellen <span aria-hidden="true">→</span></button><p id="status-message" class="status-message" role="status" aria-live="polite">Füge zuerst mindestens ein Aufgabenmodul hinzu.</p></section>
+    <section class="generate-area" aria-label="Arbeitsblatt erstellen">
+      <button id="generate-button" class="primary-button" type="button">Arbeitsblatt erstellen <span aria-hidden="true">→</span></button>
+      <p id="status-message" class="status-message" role="status" aria-live="polite">Füge zuerst mindestens ein Aufgabenmodul hinzu.</p>
+    </section>
     <section id="results" class="results-section" aria-labelledby="results-title" hidden>
-      <div class="results-heading"><div><p class="step-label">FERTIG</p><h2 id="results-title">Vorschau &amp; Export</h2><p class="section-description">Lade beide Dokumente als Word-Datei herunter. Du kannst sie in Word oder einer kompatiblen Textverarbeitung öffnen.</p></div><div class="export-actions"><button id="worksheet-download" class="secondary-button" type="button">↓ Arbeitsblatt .docx</button><button id="answers-download" class="secondary-button" type="button">↓ Lösungsblatt .docx</button></div></div>
-      <div class="preview-grid">
-        <article class="preview-card" aria-labelledby="worksheet-preview-heading"><div class="preview-card-heading"><span class="document-icon" aria-hidden="true">A</span><div><h3 id="worksheet-preview-heading">Arbeitsblatt</h3><span>Zum Ausfüllen</span></div></div><div id="worksheet-preview" class="paper-preview"></div></article>
-        <article class="preview-card" aria-labelledby="answers-preview-heading"><div class="preview-card-heading"><span class="document-icon answer-icon" aria-hidden="true">✓</span><div><h3 id="answers-preview-heading">Lösungsblatt</h3><span>Mit Ergebnissen</span></div></div><div id="answers-preview" class="paper-preview"></div></article>
+      <div class="results-heading">
+        <div><p class="step-label">FERTIG</p><h2 id="results-title">Druckvorschau</h2><p class="section-description">Die Vorschau zeigt das Arbeitsblatt in einer druckähnlichen Ansicht.</p></div>
       </div>
+      <div class="preview-grid">
+        <article class="preview-card worksheet-preview-card" aria-labelledby="worksheet-preview-heading">
+          <div class="preview-card-heading"><span class="document-icon" aria-hidden="true">A</span><div><h3 id="worksheet-preview-heading">Arbeitsblatt</h3><span>Zum Ausfüllen</span></div></div>
+          <div id="worksheet-preview" class="paper-preview"></div>
+        </article>
+        <article class="preview-card answers-preview-card" aria-labelledby="answers-preview-heading">
+          <div class="preview-card-heading"><span class="document-icon answer-icon" aria-hidden="true">✓</span><div><h3 id="answers-preview-heading">Lösungsblatt</h3><span>Für die Lehrkraft</span></div></div>
+          <div id="answers-preview" class="paper-preview"></div>
+        </article>
+      </div>
+      <div class="print-action"><button id="print-button" class="secondary-button" type="button">Drucken</button><span>Im Druckdialog bei Bedarf „Als PDF speichern“ wählen.</span></div>
     </section>
     <footer><p>Für den Unterricht gemacht · Ohne Anmeldung · Daten bleiben auf diesem Gerät</p></footer>
   </main>
